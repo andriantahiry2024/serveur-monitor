@@ -19,7 +19,8 @@ COPY public ./public
 # Sans eux, l'application retombe sur la vue du conteneur (CPU/RAM de l'hôte
 # quand même, disques du conteneur).
 
-RUN chown -R node:node /app
+RUN apk add --no-cache curl \
+ && chown -R node:node /app
 USER node
 
 EXPOSE 3000

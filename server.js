@@ -87,8 +87,11 @@ const server = http.createServer((req, res) => {
   sendFile(res, target);
 });
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`[serveur-monitor] à l'écoute sur http://0.0.0.0:${PORT}`);
+// Écoute sur toutes les interfaces, IPv4 ET IPv6 : un client qui résout
+// « localhost » en ::1 (healthcheck Coolify, busybox wget) doit pouvoir se
+// connecter. Passer un hôte explicite ('0.0.0.0') ne lierait que l'IPv4.
+server.listen(PORT, () => {
+  console.log(`[serveur-monitor] à l'écoute sur le port ${PORT} (IPv4 + IPv6)`);
   console.log(`[serveur-monitor] sources : ${JSON.stringify(collect.paths)}`);
 });
 
