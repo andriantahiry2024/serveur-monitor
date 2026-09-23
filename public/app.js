@@ -202,6 +202,19 @@ function renderTemps(temps) {
   }).join('');
 }
 
+function renderMounts(mounts) {
+  const host = $('mounts');
+  if (!mounts || !mounts.length) {
+    host.innerHTML = '<p class="muted small">Aucun montage /host/* — repli sur la vue du conteneur.</p>';
+    return;
+  }
+  host.innerHTML = `<p class="muted small">Montages hôte reçus</p>` + mounts.map((m) => `
+    <span class="temp">
+      <span class="muted">${escapeHtml(m.path)}</span>
+      <b class="${m.readOnly ? '' : 'level-warn'}">${m.readOnly ? 'ro' : 'rw'}</b>
+    </span>`).join('');
+}
+
 function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
@@ -268,6 +281,7 @@ function render(data) {
   renderNetwork(data.network);
   renderProcs(data.processes);
   renderTemps(data.temps);
+  renderMounts(data.hostMounts);
 
   $('kernel').textContent = data.host.kernel;
   $('platform').textContent = data.host.platform;

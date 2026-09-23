@@ -179,6 +179,9 @@ main { padding: 22px 26px 10px; display: grid; gap: 18px; }
 .table .name { max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .temps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.mounts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.mounts p { flex-basis: 100%; margin: 0; }
+.small { font-size: 12px; }
 .temp {
   border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
   font-size: 12.5px; display: flex; gap: 8px; align-items: baseline;
