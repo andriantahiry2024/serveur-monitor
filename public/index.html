@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mon serveur — supervision</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="dot" id="live"></span>
+    <div>
+      <h1 id="hostname">Mon serveur</h1>
+      <p class="sub" id="systemline">chargement…</p>
+    </div>
+  </div>
+  <div class="topmeta">
+    <div><span class="k">Source</span><b id="source">—</b></div>
+    <div><span class="k">Uptime</span><b id="uptime">—</b></div>
+    <div><span class="k">Maj</span><b id="updated">—</b></div>
+  </div>
+</header>
+
+<div class="banner" id="banner" hidden></div>
+
+<main>
+  <section class="grid gauges">
+    <article class="card gauge-card">
+      <div class="card-head"><h2>Processeur</h2><span class="pill" id="cpu-pill">—</span></div>
+      <div class="gauge-wrap">
+        <svg class="gauge" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="track" cx="60" cy="60" r="52"></circle>
+          <circle class="value" id="cpu-arc" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <div class="gauge-label"><b id="cpu-pct">—</b><span>utilisé</span></div>
+      </div>
+      <canvas class="spark" id="cpu-spark" height="40"></canvas>
+      <ul class="kv">
+        <li><span>Charge (1/5/15 min)</span><b id="load">—</b></li>
+        <li><span>Cœurs</span><b id="cores">—</b></li>
+        <li><span>Modèle</span><b id="cpumodel" class="ellipsis">—</b></li>
+        <li><span>Attente E/S · vol CPU</span><b id="cpudetail">—</b></li>
+      </ul>
+      <div class="cores" id="percore"></div>
+    </article>
+
+    <article class="card gauge-card">
+      <div class="card-head"><h2>Mémoire vive</h2><span class="pill" id="ram-pill">—</span></div>
+      <div class="gauge-wrap">
+        <svg class="gauge" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="track" cx="60" cy="60" r="52"></circle>
+          <circle class="value" id="ram-arc" cx="60" cy="60" r="52"></circle>
+        </svg>
+        <div class="gauge-label"><b id="ram-pct">—</b><span>utilisée</span></div>
+      </div>
+      <canvas class="spark" id="ram-spark" height="40"></canvas>
+      <ul class="kv">
+        <li><span>Utilisée / totale</span><b id="ram-used">—</b></li>
+        <li><span>Disponible</span><b id="ram-avail">—</b></li>
+        <li><span>Cache & tampons</span><b id="ram-cache">—</b></li>
+        <li><span>Swap</span><b id="swap">—</b></li>
+      </ul>
+    </article>
+
+    <article class="card wide">
+      <div class="card-head"><h2>Disques</h2><span class="pill" id="disk-pill">—</span></div>
+      <div id="disks" class="disks"><p class="muted">chargement…</p></div>
+    </article>
+  </section>
+
+  <section class="grid cols-3">
+    <article class="card">
+      <div class="card-head"><h2>Réseau</h2></div>
+      <div id="network" class="stack"><p class="muted">chargement…</p></div>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><h2>Processus les plus actifs</h2></div>
+      <table class="table" id="procs">
+        <thead><tr><th>PID</th><th>Nom</th><th class="num">CPU</th><th class="num">RSS</th></tr></thead>
+        <tbody><tr><td colspan="4" class="muted">chargement…</td></tr></tbody>
+      </table>
+    </article>
+
+    <article class="card">
+      <div class="card-head"><h2>Système</h2></div>
+      <ul class="kv" id="sysinfo">
+        <li><span>Noyau</span><b id="kernel">—</b></li>
+        <li><span>Plateforme</span><b id="platform">—</b></li>
+        <li><span>Depuis</span><b id="booted">—</b></li>
+      </ul>
+      <div id="temps" class="temps"></div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <span>Rafraîchissement toutes les <b id="interval">2</b> s</span>
+  <span class="muted">Tableau de bord auto-hébergé · <span id="build">serveur-monitor</span></span>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
